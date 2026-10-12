@@ -1,10 +1,10 @@
 // Holiday activities: 3D stations placed in the town + tap-based overlay mini-games (DOM buttons, no stretched images).
-import { S, persist } from './save.js?v=np10';
-import { sfx } from './audio.js?v=np10';
-import { panel } from './ui.js?v=np10';
-import { TH } from './theme.js?v=np10';
-import * as OPS from './opsrow.js?v=np10';
-import * as MX from './merry.js?v=np10';
+import { S, persist } from './save.js?v=np11';
+import { sfx } from './audio.js?v=np11';
+import { panel } from './ui.js?v=np11';
+import { TH } from './theme.js?v=np11';
+import * as OPS from './opsrow.js?v=np11';
+import * as MX from './merry.js?v=np11';
 const $q = (c, s) => c.querySelector(s), $a = (c, s) => [...c.querySelectorAll(s)];
 const sh = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = (Math.random() * (i + 1)) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const BTN = 'style="font:bold 17px system-ui;padding:12px 10px;margin:5px;border-radius:14px;border:0;min-width:96px;background:#fff3;color:#fff"';

@@ -1,5 +1,5 @@
 // Operations Row: the North Pole departments and places named on santaupdate.com that the village was missing. Pure data (original wording).
-import * as MD from './merrydata.js?v=np10';
+import * as MD from './merrydata.js?v=np11';
 const PI = Math.PI;
 // [id, name (map/HUD), sign, side 'W'|'E', z0, z1, colour, activity label, elf [id, name, hi lines, more lines]]
 export const ROW = [

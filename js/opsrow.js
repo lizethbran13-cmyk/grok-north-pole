@@ -1,10 +1,10 @@
 // Operations Row (North Pole only): a new street of walk-in departments on fresh land east of Mistletoe Street,
 // led by the Wrapping Department (belts of moving 3D presents, wrapping elves, the wrapping mini-game).
 import * as THREE from 'three';
-import { S, persist } from './save.js?v=np10';
-import { sfx } from './audio.js?v=np10';
-import { panel } from './ui.js?v=np10';
-import * as D from './opsdata.js?v=np10';
+import { S, persist } from './save.js?v=np11';
+import { sfx } from './audio.js?v=np11';
+import { panel } from './ui.js?v=np11';
+import * as D from './opsdata.js?v=np11';
 const PI = Math.PI;
 const $a = (c, s) => [...c.querySelectorAll(s)], $q = (c, s) => c.querySelector(s);
 const sh = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = (Math.random() * (i + 1)) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };

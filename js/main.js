@@ -1,16 +1,16 @@
 // Grok North Pole Village - boot, app state, main loop.
 import * as THREE from 'three';
-import { E, initEngine, render, trackFps } from './engine.js?v=np10';
-import { initMats } from './mats.js?v=np10';
-import { initInput, clearEdges, edge, IN } from './input.js?v=np10';
-import { initAudio, setSound, sfx } from './audio.js?v=np10';
-import { S, persist } from './save.js?v=np10';
-import { HUD } from './hud.js?v=np10';
-import { UI, closePanel } from './ui.js?v=np10';
-import { Net } from './net.js?v=np10';
-import { Game } from './game.js?v=np10';
-import { $ } from './util.js?v=np10';
-import { loadFont } from './text3d.js?v=np10';
+import { E, initEngine, render, trackFps } from './engine.js?v=np11';
+import { initMats } from './mats.js?v=np11';
+import { initInput, clearEdges, edge, IN } from './input.js?v=np11';
+import { initAudio, setSound, sfx } from './audio.js?v=np11';
+import { S, persist } from './save.js?v=np11';
+import { HUD } from './hud.js?v=np11';
+import { UI, closePanel } from './ui.js?v=np11';
+import { Net } from './net.js?v=np11';
+import { Game } from './game.js?v=np11';
+import { $ } from './util.js?v=np11';
+import { loadFont } from './text3d.js?v=np11';
 const app = window.__pt = window.__hq = { state: 'boot', paused: true, game: null, ready: false, busy: false, simSpeed: 1 };
 function setLoad(p, t) { const b = $('loadBar'); if (b) b.style.width = p + '%'; if (t) $('loadTxt').textContent = t; }
 async function boot() {
