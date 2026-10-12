@@ -14,7 +14,7 @@ export const FL = 0.02;
 export const REGIONS = [
   { id: 'hall', x0: -12, x1: 12, z0: -64, z1: -42, y0: -1, y1: 8, ceil: 6.4, name: '🏛️ Town Hall' },
   { id: 'library', x0: -46, x1: -28, z0: -58, z1: -42, y0: -1, y1: 7, ceil: 5.2, name: '📚 Storybook Library' },
-  { id: 'cafe', x0: 28, x1: 46, z0: -58, z1: -42, y0: -1, y1: 7, ceil: 5.0, name: '🥬 Mrs. Claus's Cocoa Café' },
+  { id: 'cafe', x0: 28, x1: 46, z0: -58, z1: -42, y0: -1, y1: 7, ceil: 5.0, name: '🥬 Mrs. Claus’s Cocoa Café' },
   { id: 'post', x0: -46, x1: -30, z0: 40, z1: 54, y0: -1, y1: 7, ceil: 5.0, name: '📮 North Pole Post Office' },
   { id: 'inn', x0: 28, x1: 46, z0: 40, z1: 56, y0: -1, y1: 7, ceil: 5.0, name: '🛏️ Cozy Mitten Inn' },
   { id: 'market', x0: 50, x1: 74, z0: -28, z1: -10, y0: -1, y1: 8, ceil: 6.2, name: '🌵 Christmas Market' },
@@ -35,7 +35,7 @@ export const REGIONS = [
   { id: 'toys', x0: -114, x1: -98, z0: -116, z1: -102, y0: -1, y1: 7, ceil: 4.8, name: "🧸 Shelly's Toy Burrow" },
   { id: 'cinema', x0: 48, x1: 66, z0: 44, z1: 60, y0: -1, y1: 8, ceil: 5.6, name: '🎬 Slowmotion Picture House' },
   { id: 'icecream', x0: 68, x1: 79, z0: 44, z1: 56, y0: -1, y1: 7, ceil: 4.6, name: '🍦 Cactus Cream' },
-  { id: 'tortuga', x0: 60, x1: 96, z0: -68, z1: -42, y0: -1, y1: 8, ceil: 6.4, tone: 0.84, name: '🐢 Santa's Toy Workshop (by Tortuga Tech)' },
+  { id: 'tortuga', x0: 60, x1: 96, z0: -68, z1: -42, y0: -1, y1: 8, ceil: 6.4, tone: 0.84, name: '🐢 Santa’s Toy Workshop (by Tortuga Tech)' },
   // the hidden place (below the world, reached by a secret)
   { id: 'u_tunnel', x0: 150, x1: 176, z0: -6, z1: 6, y0: -34, y1: -24, ceil: -26.0, name: '🕳️ Ice Tunnels', under: true },
   { id: 'u_crystal', x0: 176, x1: 204, z0: -16, z1: 16, y0: -34, y1: -20, ceil: -22.5, name: '💎 Ice Crystal Cavern', under: true },
@@ -230,7 +230,7 @@ function square(w) { const S = w.spots;
   [[-8, 30], [8, 30]].forEach(([x, z]) => K.lampPost(w, x, z)); for (let i = 0; i < 12; i++) { const a = i / 12 * PI * 2; K.lampPost(w, Math.cos(a) * 31, Math.sin(a) * 31); }
   // shuttle-cart track around the plaza (sand ring) + its little stop
   w.add('m', new THREE.RingGeometry(33.4, 36.4, 128).rotateX(-PI / 2), 0xd9b27a, 0, 0.008, 0); S.cart = { r: 34.9 };
-  // café terrace (outside the Mrs. Claus's Cocoa Café)
+  // café terrace (outside the Mrs. Claus’s Cocoa Café)
   [[31, -38], [36, -36], [42, -38]].forEach(([x, z], i) => { K.tableR(w, x, z, 0.7, 0.8, 0xffffff); for (let k = 0; k < 3; k++) { const a = k * 2.1; K.stool(w, x + Math.cos(a) * 1.1, z + Math.sin(a) * 1.1, SUN[(i + k) % 8]); } w.add('x', cyl(8), 0xd1d5db, x, 0.8, z, 0, 0, 0, 0.04, 2.0, 0.04); for (let k = 0; k < 8; k++) w.add('f', cone(3), k % 2 ? 0x4ade80 : 0xffffff, x, 2.55, z, 0, k / 8 * PI * 2, 0, 1.6, 0.6, 0.6); });
   // pond-side life: picnic umbrellas, a little fishing pier, lemonade cart, painter's easel, pots of blooms
   [[-7.75, 13.4, 0xff5d8f], [7.75, -13.4, 0x2dd4bf], [-14.6, -5.6, 0xffb020]].forEach(([x, z, c], i) => { w.add('x', cyl(8), 0xf5f5f0, x, 0, z, 0, 0, 0, 0.05, 2.9, 0.05);
