@@ -1,7 +1,7 @@
 // North Pole Village townsfolk, what they say, side tasks and the mystery "Who silenced the Sleigh Bells?". Pure data + helpers.
-import { S, persist } from './save.js?v=np9';
-import * as TS from './story_theme.js?v=np9';
-import * as OD from './opsdata.js?v=np9';
+import { S, persist } from './save.js?v=np10';
+import * as TS from './story_theme.js?v=np10';
+import * as OD from './opsdata.js?v=np10';
 const PI = Math.PI;
 export const HATS = [
   { id: 'none', n: 'No Hat', how: 'Always yours' }, { id: 'pupears', n: 'Schnauzer Ears', how: "Find Candy's 3 squeaky candy-cane toys" }, { id: 'flower', n: 'Snowy Winter Rose', how: "Plant Mama Rosa's 4 winter roses" },
@@ -208,7 +208,7 @@ export function talk(id, G) { const n = (S.talks[id] = (S.talks[id] | 0) + 1); p
     case 'fern': return { lines: L(cyc(['Howdy! Want to try Cookie Rush? Plant, water and pick as many cookies as you can in 60 seconds!', 'Harvest 8 and I\'ll give you my spare chef hat.']), ), fx: () => G.offerFarm() };
     case 'coach': return { lines: L(cyc(['Cozy and steady wins the race. Well, sometimes. Usually Zoom wins.', 'The secret to the Derby: cheer on the beat!'])) };
     case 'zoom': return { lines: L(cyc(['I\'m Zoom, 12-time Reindeer Derby champ. My record: 4 minutes for one lap.', 'Speedy #3 has real heart. Pi-rat\'s turbo sleigh doesn\'t hurt either.'])) };
-    case 'paige': return { lines: L(cyc(['Shhh… welcome to the library. Whisper cozily.', 'The ancient book by the window is older than Grandpa. Much older.', q === 1 ? 'Someone checked out a book this morning. Check the card catalog!' : 'Every book here is overdue. Nobody minds.'])) };
+    case 'paige': return { lines: L(cyc(['Welcome to the Santa Update Newsroom! Breaking North Pole news, every day.', 'The ancient book by the window is older than Grandpa. Much older.', q === 1 ? 'Someone checked out a book this morning. Check the card catalog!' : 'Every book here is overdue. Nobody minds.'])) };
     case 'leafy': return { lines: L(cyc(['Welcome to the Mrs. Claus’s Kitchen! Today\'s special: cookie.', q === 1 ? 'Funny thing, a tiny picnic order came in at dawn. The slip\'s on the counter.' : 'Our dessert menu? Cookie, but colder.'])) };
     case 'drdune': return { lines: L(cyc(['Welcome to the museum! That fossil is Grand-Grand-Grandma Archie. She was a sea elf, 5 meters long!', 'Some say our ancestors left tunnels under this valley. Nobody has ever found them.'])) };
     default: { const d = NPCS.find((x) => x.id === id); const gen = ['Hello there! Lovely day for a cozy stroll.', 'Have you seen the Launch Night decorations? Took us 3 weeks!', 'Cookie? Cookie.', 'Welcome to North Pole Village! Take your time. We do.', 'The hot springs on the hill are SO relaxing.', 'Did you hear? The Sleigh Bells is missing!', 'Ride the North Pole Express if you\'re in a hurry. We never are.', 'Santa’s Workshop tested my reading glasses. Unbreakable! Now I just need to stop losing them.', 'Did you see the Big Drop at the Santa’s Workshop yard? CLONK!'];

@@ -1,29 +1,29 @@
 // Grok North Pole Village runtime: the town, players, townsfolk, the shuttle cart, ambient desert life, day -> sunset, collectibles,
 // the Sleigh Bells mystery, the Reindeer Derby + Cookie Rush (3D mini-games), a hidden puzzle, co-op hooks.
 import * as THREE from 'three';
-import { RP, setP, relayNPC, freeSpot } from './layout.js?v=np9';
-import { makeFolk, animFolk } from './folk.js?v=np9';
-import { holAct } from './holiday.js?v=np9';
-import { tick as opsTick } from './opsrow.js?v=np9';
-import { GLYPH_TXT } from './story_theme.js?v=np9';
-import { LIGHT as THL, TH as THM } from './theme.js?v=np9';
-import { panel } from './ui.js?v=np9';
-import { E, setEnvironment, followShadow, skyUniforms } from './engine.js?v=np9';
-import { World } from './world.js?v=np9';
-import { buildTown, regionAt, areaName, REGIONS, DOORS, NEAR, STOPS, TRACK } from './town.js?v=np9';
-import { UY } from './under.js?v=np9';
-import { Player } from './player.js?v=np9';
-import { FX } from './fx.js?v=np9';
-import { makeRat, animRat, MB, toGroup } from './models.js?v=np9';
-import { makePup, animPup, birdGeo } from './dogs.js?v=np9';
-import { makeTortoise, animTortoise, makeRoadrunner, animRoadrunner, makeLizard, animLizard, makeSunstone } from './critters.js?v=np9';
-import { P } from './geo.js?v=np9';
-import { rcyl, capsule, torus, sph, cone, heart, star, blobGeo } from './shapes.js?v=np9';
-import { updateFrustum, inView, LightPool } from './perf.js?v=np9';
-import { sfx, playMusic } from './audio.js?v=np9';
-import { S, persist } from './save.js?v=np9';
-import { NPCS, talk, clueText, SUN_CLUES, HATS, BADGES, GLYPH } from './story.js?v=np9';
-import { readMove, edge, held, IN } from './input.js?v=np9';
+import { RP, setP, relayNPC, freeSpot } from './layout.js?v=np10';
+import { makeFolk, animFolk } from './folk.js?v=np10';
+import { holAct } from './holiday.js?v=np10';
+import { tick as opsTick } from './opsrow.js?v=np10';
+import { GLYPH_TXT } from './story_theme.js?v=np10';
+import { LIGHT as THL, TH as THM } from './theme.js?v=np10';
+import { panel } from './ui.js?v=np10';
+import { E, setEnvironment, followShadow, skyUniforms } from './engine.js?v=np10';
+import { World } from './world.js?v=np10';
+import { buildTown, regionAt, areaName, REGIONS, DOORS, NEAR, STOPS, TRACK } from './town.js?v=np10';
+import { UY } from './under.js?v=np10';
+import { Player } from './player.js?v=np10';
+import { FX } from './fx.js?v=np10';
+import { makeRat, animRat, MB, toGroup } from './models.js?v=np10';
+import { makePup, animPup, birdGeo } from './dogs.js?v=np10';
+import { makeTortoise, animTortoise, makeRoadrunner, animRoadrunner, makeLizard, animLizard, makeSunstone } from './critters.js?v=np10';
+import { P } from './geo.js?v=np10';
+import { rcyl, capsule, torus, sph, cone, heart, star, blobGeo } from './shapes.js?v=np10';
+import { updateFrustum, inView, LightPool } from './perf.js?v=np10';
+import { sfx, playMusic } from './audio.js?v=np10';
+import { S, persist } from './save.js?v=np10';
+import { NPCS, talk, clueText, SUN_CLUES, HATS, BADGES, GLYPH } from './story.js?v=np10';
+import { readMove, edge, held, IN } from './input.js?v=np10';
 const PI = Math.PI;
 const TOYS = [[60, 0, 76], [-70, 0, 61], [108, 0, -4]].map((p) => RP(...p));
 const DAY = 420; // seconds per day -> sunset cycle
@@ -76,13 +76,13 @@ export class Game {
     if (id === 'luna') return !S.rats.luna || (S.clues.chart && !S.flags.luna); if (id === 'pirat') return !S.rats.pirat || !S.flags.race; if (id === 'snowie') return !S.rats.snowie || (q >= 1 && !(S.sus.snowie | 0)) || !S.flags.snowie;
     if (id === 'rocky' || id === 'glimmer') return q >= 1 && !(S.sus[id] | 0); if (id === 'penny') return (S.sus.rocky | 0) === 1; if (id === 'coral') return (S.sus.glimmer | 0) === 1; if (id === 'taffy') return (S.sus.snowie | 0) === 1; if (id === 'fern') return !S.flags.farm; return false; }
   updateNPCs(dt) { const me = this.me, T = this.T;
-    for (const n of this.npcs) { const d2 = (me.x - n.x) ** 2 + (me.z - n.z) ** 2; const vis = !n.hidden && this.vis.has(n.region) && !(n.region === 'out' && this.region !== 'out' && d2 > 625) && !(n.region === 'out' && d2 > 70 * 70); n.rig.root.visible = vis; if (n.cart) n.cart.visible = vis; n.mark.visible = false; if (!vis && !n.d.walk) continue;
-      const near = Math.hypot(me.x - n.x, me.z - n.z) < (n.kind === 'tort' ? 3.2 : 4) && Math.abs(me.y - n.y) < 3; let sp = 0; const talking = this.chat && this.chat.npc === n;
+    for (const n of this.npcs) { const d2 = (me.x - n.x) ** 2 + (me.z - n.z) ** 2; const vis = !n.hidden && this.vis.has(n.region) && !(n.region === 'out' && this.region !== 'out' && d2 > 625) && !(n.region === 'out' && d2 > 70 * 70); n.rig.root.visible = vis; if (n.cart) n.cart.visible = vis; n.mark.visible = false; if (!vis && !n.d.walk && !(this.chat && this.chat.npc === n)) continue;
+      const near = Math.hypot(me.x - n.x, me.z - n.z) < (n.kind === 'tort' ? 3.2 : 5.5) && Math.abs(me.y - n.y) < 3; let sp = 0; const talking = this.chat && this.chat.npc === n;
       if (n.d.walk && !talking && !(near && !n.cart)) { const p = n.d.walk[n.wp]; const dx = p[0] - n.x, dz = p[1] - n.z, d = Math.hypot(dx, dz); const v = n.d.v || 0.8;
         if (d < 0.3) n.wp = (n.wp + 1) % n.d.walk.length; else { n.x += dx / d * v * dt; n.z += dz / d * v * dt; let t = Math.atan2(dx, dz) - n.yaw; while (t > PI) t -= PI * 2; while (t < -PI) t += PI * 2; n.yaw += t * Math.min(1, dt * 6); sp = v; }
         if (vis) { const g = this.world.ground(n.x, n.z, n.y + 1, 0.1).y; if (g > -50) n.y = g; } }
       else if (n.d.run && !talking && !near) { const [cx, cz, r] = n.d.run, a = T * 0.5 + (n.d.phase || 0); const nx = cx + Math.cos(a) * r, nz = cz + Math.sin(a) * r * 0.6; n.yaw = Math.atan2(nx - n.x, nz - n.z); sp = Math.hypot(nx - n.x, nz - n.z) / Math.max(dt, 1e-3); n.x = nx; n.z = nz; }
-      else if (talking || (near && n.d.mode !== 'sleep' && n.d.mode !== 'soak')) { let t = Math.atan2(me.x - n.x, me.z - n.z) - n.yaw; while (t > PI) t -= PI * 2; while (t < -PI) t += PI * 2; n.yaw += t * Math.min(1, dt * 3); }
+      else if (talking || (near && n.d.mode !== 'sleep' && n.d.mode !== 'soak')) { let t = Math.atan2(me.x - n.x, me.z - n.z) - n.yaw; while (t > PI) t -= PI * 2; while (t < -PI) t += PI * 2; n.yaw += t * Math.min(1, dt * (talking ? 8 : 5)); }
       if (n.override) { n.override(n, dt); sp = n.sp || 0; }
       const R = n.rig.root; R.position.set(n.x, n.y, n.z); R.rotation.y = n.yaw;
       if (n.cart) { n.cart.position.set(n.x - Math.sin(n.yaw) * 2.2, n.y, n.z - Math.cos(n.yaw) * 2.2); n.cart.rotation.y = n.yaw; }

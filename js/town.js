@@ -1,18 +1,18 @@
 // Grok North Pole Village: Martina "Torty"'s desert-oasis hometown. A palm-ringed Candy Cane Square, Mistletoe Street, the Burrows (homes),
 // The North Pole, the Reindeer Racetrack, the Christmas Tree Farm and the Snowdrift Hills edge. 18 enterable buildings, each its own
 // culled region; outdoors batch into big merged chunks, tiny decor goes into far-culled "detail" chunks. All real 3D geometry.
-import { tortuga } from './tortuga.js?v=np9';
-import { districts } from './districts.js?v=np9';
+import { tortuga } from './tortuga.js?v=np10';
+import { districts } from './districts.js?v=np10';
 import * as THREE from 'three';
-import * as LY from './layout.js?v=np9';
-import * as OPS from './opsrow.js?v=np9';
-import * as OD from './opsdata.js?v=np9';
-import * as FA from './facades.js?v=np9';
-import * as TH from './theme.js?v=np9';
-import * as HOL from './holiday.js?v=np9';
-import * as K from './kit.js?v=np9';
-import { interiors } from './interiors.js?v=np9';
-import { underground } from './under.js?v=np9';
+import * as LY from './layout.js?v=np10';
+import * as OPS from './opsrow.js?v=np10';
+import * as OD from './opsdata.js?v=np10';
+import * as FA from './facades.js?v=np10';
+import * as TH from './theme.js?v=np10';
+import * as HOL from './holiday.js?v=np10';
+import * as K from './kit.js?v=np10';
+import { interiors } from './interiors.js?v=np10';
+import { underground } from './under.js?v=np10';
 const { wall, D, G, floor, ceiling, sign3d, rbox, rcyl, lathe, sph, cyl, cone, torus, capsule, tube, leaf, star, heart, blobGeo, pick } = K;
 const R = K.R, PI = Math.PI; let I = null;
 export const FL = 0.02;

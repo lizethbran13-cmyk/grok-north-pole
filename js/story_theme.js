@@ -1,4 +1,4 @@
-import * as OD from './opsdata.js?v=np9';
+import * as OD from './opsdata.js?v=np10';
 // North Pole Village: names, mystery and every line of dialogue (original writing). Plugged into story.js by the theme build.
 export const NAMES = { torty: 'Torty (Martina) · Toy Tester', mama: 'Mama Elf Hollyberry', papa: 'Papa Elf Juniper', gramps: 'Grandpa Elf Tannenbaum', pebble: 'Tinsel (the littlest elf)', candy: 'Candy (Mini Schnauzer)', luna: 'Luna (Ratita Industries CEO)', pirat: 'Pi-rat (Chief Inventor)', snowie: 'Snowie (Head of Fun)',
   mayor: 'Santa Claus', rocky: 'Rocket (Elf Mail Runner)', sam: 'Sleigh-Bus Sid', tilly: 'Granny Elf Mistle', bert: 'Elf Bertram Bough', lizzy: 'Elf Lizzie Lights', pip: 'Pip (elf kid)', squeak: 'Squeak (elf kid)', zip: 'Elf Zip (North Pole Express)', picA: 'Elf Daisy (snow picnic)', picB: 'Elf Dougie Pine (snow picnic)', picC: 'Elf Tamsin (sipping cocoa)', picD: 'Elf Rocco',

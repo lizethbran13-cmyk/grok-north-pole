@@ -1,7 +1,7 @@
 // Grok North Pole Village interiors: 18 walk-in buildings, each packed with real 3D props (and something to do).
 import * as THREE from 'three';
-import * as K from './kit.js?v=np9';
-import { claypot, lettuce, stall, tcrate, shade, SUN, prism, agave, barrel, prickly, tortStatue, lanternString } from './town.js?v=np9';
+import * as K from './kit.js?v=np10';
+import { claypot, lettuce, stall, tcrate, shade, SUN, prism, agave, barrel, prickly, tortStatue, lanternString } from './town.js?v=np10';
 const { wall, D, sign3d, rbox, rcyl, lathe, sph, cyl, cone, torus, capsule, tube, star, heart, blobGeo, pick, PR } = K;
 const R = K.R, PI = Math.PI, FL = 0.12;
 const art = (w, axis, at, c, y, W, H, side, k) => PR.frame(K.scaled(w, 0, FL, 0, 0.25), axis, (at + side * 0.25) / 0.25, c / 0.25, y / 0.25, W / 0.25, H / 0.25, side, k);
@@ -67,7 +67,7 @@ function library(w) { w.region = 'library'; const I = w.I;
   { const T = counter(w, -30.2, -53.5, -PI / 2, 3.2, 0x8a5a32); register(w, T, 0.9); books(w, -30.3, FL + 1.13, -54.4, 6, 'z'); w.add('x', rcyl(0.06, 0.18, 0.02, 10), 0x7c2d12, -30.2, FL + 1.13, -52.6); }
   { const x = -36, z = -47.2; w.add('m', rbox(1.4, 0.06, 0.6, 0.02), 0x9a6a3e, x, FL + 0.7, z); w.add('m', rbox(1.4, 0.06, 0.6, 0.02), 0x9a6a3e, x, FL + 0.3, z); [-1, 1].forEach((s) => [-1, 1].forEach((t) => w.add('m', torus(0.4, 12), 0x334155, x + s * 0.6, FL + 0.1, z + t * 0.25, 0, PI / 2, 0, 0.1, 0.1, 0.1))); books(w, x - 0.6, FL + 0.73, z, 9); books(w, x - 0.6, FL + 0.33, z, 8); w.solid(x - 0.7, 0, z - 0.3, x + 0.7, FL + 0.8, z + 0.3, { cam: false }); }
   K.rug(w, -37, -44, 0, 6, 2.2, 0xffd23f, 0xfff1d6); for (let i = 0; i < 6; i++) hh('toyBlock', w, -39 + i * 0.8, -43.6, 0.2, 0, 2, 0, SUN[i]); hh('teddy', w, -35.4, -43.3, 0.18, 0, PI);
-  sign3d(w, 'QUIET PLEASE (WHISPER COZILY)', -37, 4.6, -57.0, 0, 0.18, 0x1e3a8a, 0xfff1d6); [[-46, -42.5], [-28, -42.5]].forEach(([x, z]) => bigPlant(w, x + (x < -40 ? 0.9 : -0.9), z - 0.8, 1.1)); sconce(w, 'z', -45.7, -46, 3.0, 1); sconce(w, 'z', -28.3, -46, 3.0, -1);
+  sign3d(w, 'SANTA UPDATE NEWSROOM  ·  ON AIR', -37, 4.6, -57.0, 0, 0.18, 0x1e3a8a, 0xfff1d6); [[-46, -42.5], [-28, -42.5]].forEach(([x, z]) => bigPlant(w, x + (x < -40 ? 0.9 : -0.9), z - 0.8, 1.1)); sconce(w, 'z', -45.7, -46, 3.0, 1); sconce(w, 'z', -28.3, -46, 3.0, -1);
   shell(w, -38, 3.9, -57.0); }
 // ------------------------------------------------------------------------------------------------ MRS. CLAUS’S KITCHEN
 function cafe(w) { w.region = 'cafe'; const I = w.I;
