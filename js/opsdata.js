@@ -1,4 +1,5 @@
 // Operations Row: the North Pole departments and places named on santaupdate.com that the village was missing. Pure data (original wording).
+import * as MD from './merrydata.js?v=np10';
 const PI = Math.PI;
 // [id, name (map/HUD), sign, side 'W'|'E', z0, z1, colour, activity label, elf [id, name, hi lines, more lines]]
 export const ROW = [
@@ -181,3 +182,6 @@ export const SITE_NPCS = []; { const by = {}; for (const e of SITE_ELVES) (by[e[
     L.forEach((e, i) => { const p = pts[Math.floor(i * step + step / 2) % pts.length]; const yaw = Math.atan2(cx - p[0], cz - p[1]); SITE_NPCS.push({ id: _slug(e[0]), n: `${e[0]} (${e[1]})`, look: { t: { shell: 'olive' }, s: 0.3 }, at: [p[0], p[1], yaw], region: id, _site: e }); }); } }
 for (const d of SITE_NPCS) { const e = d._site; TALK[d.id] = { hi: [`Hi! I'm ${e[0]}, ${e[1]}.`, e[3]], more: [e[3], `Being ${e[1].replace(/^(Head Elf|Director|Vice President)/, 'the $1')} keeps me busy, but there's always time to say hello to a new elf!`, 'Keep up the good work around the village. Every elf helps Operation Merry Christmas!'] }; }
 NPCS.push(...SITE_NPCS);
+
+// DLC #43/#44 (merrydata.js): extra walk-in regions, doors, elves and lines, only when unlocked
+REG.push(...MD.REG); Object.assign(DOORS, MD.DOORS); NPCS.push(...MD.NPCS); Object.assign(TALK, MD.TALK);

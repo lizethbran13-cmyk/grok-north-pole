@@ -5,6 +5,7 @@ import { RP, setP, relayNPC, freeSpot } from './layout.js?v=np10';
 import { makeFolk, animFolk } from './folk.js?v=np10';
 import { holAct } from './holiday.js?v=np10';
 import { tick as opsTick } from './opsrow.js?v=np10';
+import { tick as mxTick } from './merry.js?v=np10';
 import { GLYPH_TXT } from './story_theme.js?v=np10';
 import { LIGHT as THL, TH as THM } from './theme.js?v=np10';
 import { panel } from './ui.js?v=np10';
@@ -30,7 +31,7 @@ const DAY = 420; // seconds per day -> sunset cycle
 export class Game {
   constructor(app, opts = {}) {
     this.app = app; this.scene = E.scene; this.net = app.net; this.hud = app.hud; this.T = 0; this.levelId = 'tortytown';
-    const w = this.world = new World(); w.game = this; w._tick = (dt, G) => opsTick(w, dt, G); { const R = E.renderer, rt = new THREE.WebGLRenderTarget(4, 4), sc = new THREE.Scene(); w.uploader = (m) => { const fc = m.frustumCulled; m.frustumCulled = false; const par = m.parent; sc.add(m); const prev = R.getRenderTarget(), sm = R.shadowMap.autoUpdate; R.shadowMap.autoUpdate = false; R.setRenderTarget(rt); R.render(sc, E.camera); R.setRenderTarget(prev); R.shadowMap.autoUpdate = sm; sc.remove(m); if (par) par.add(m); m.frustumCulled = fc; }; w._upRT = rt; } buildTown(w); w.finalize(this.scene); w.uploader = null; w._upRT.dispose();
+    const w = this.world = new World(); w.game = this; w._tick = (dt, G) => { opsTick(w, dt, G); mxTick(w, dt, G); }; { const R = E.renderer, rt = new THREE.WebGLRenderTarget(4, 4), sc = new THREE.Scene(); w.uploader = (m) => { const fc = m.frustumCulled; m.frustumCulled = false; const par = m.parent; sc.add(m); const prev = R.getRenderTarget(), sm = R.shadowMap.autoUpdate; R.shadowMap.autoUpdate = false; R.setRenderTarget(rt); R.render(sc, E.camera); R.setRenderTarget(prev); R.shadowMap.autoUpdate = sm; sc.remove(m); if (par) par.add(m); m.frustumCulled = fc; }; w._upRT = rt; } buildTown(w); w.finalize(this.scene); w.uploader = null; w._upRT.dispose();
     setEnvironment(w.env); this.fx = new FX(this.scene); { const N = 900, pa = new Float32Array(N * 3); for (let i = 0; i < N * 3; i++) pa[i] = (Math.random() - 0.5) * 60; const gg = new THREE.BufferGeometry(); gg.setAttribute('position', new THREE.BufferAttribute(pa, 3)); this.wx = new THREE.Points(gg, new THREE.PointsMaterial({ color: THM.snow ? 0xffffff : 0xffa94d, size: THM.snow ? 0.16 : 0.07, transparent: true, opacity: THM.snow ? 0.9 : 0.7, depthWrite: false })); this.wx.frustumCulled = false; this.scene.add(this.wx); } this.extra = []; this.lightPool = new LightPool(this.scene, w.lights, 4);
     this.players = new Map();
     this.me = new Player({ rat: 'human', look: S.look, outfit: S.outfit, name: S.name || 'You', local: true, gadgets: new Set(), pid: opts.pid || 'me' });
