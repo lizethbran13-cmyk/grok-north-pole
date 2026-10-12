@@ -1,7 +1,7 @@
 // The hidden place beneath North Pole Village: Ice Tunnels -> Ice Crystal Cavern -> Hall of the First Elves. (Reached only by a secret.)
 import * as THREE from 'three';
-import * as K from './kit.js?v=np1';
-import { tortStatue, shade, SUN } from './town.js?v=np1';
+import * as K from './kit.js?v=np2';
+import { tortStatue, shade, SUN } from './town.js?v=np2';
 const { wall, D, sign3d, rbox, rcyl, lathe, sph, cyl, cone, torus, capsule, tube, star, blobGeo, pick } = K;
 const R = K.R, PI = Math.PI; export const UY = -30;
 const ROCK = [0x8a6a52, 0x7a5c48, 0x9a785e, 0x6e523f];
@@ -15,7 +15,7 @@ function room(w, id, x0, z0, x1, z1, ceil, floorCol, open) { w.region = id; cons
   for (const [ax, at, a, b, sd] of sides) { const op = (open || []).filter((o) => o[0] === ax && Math.abs(o[1] - at) < 0.1); const holes = op.map((o) => D(o[2], o[3], 3.6));
     wall(w, ax, at + sd * 0.15, a, b, H, 0x6e523f, holes, { y: Y, th: 0.3, noTrim: true, noBase: true, frame: 0xc9a27a }); let cur = a; const segs = []; for (const o of op.sort((p, q) => p[2] - q[2])) { segs.push([cur, o[2] - 0.4]); cur = o[3] + 0.4; } segs.push([cur, b]); segs.forEach(([p, q]) => q > p && rockWall(w, ax, at, p, q, Y, H, sd)); } }
 export function underground(w) { const Y = UY;
-  // ---------------- ANCIENT TUNNELS (arrival)
+  // ---------------- ICE TUNNELS (arrival)
   room(w, 'u_tunnel', 150, -6, 176, 6, -26.0, 0x9a785e, [['z', 176, -2, 2]]); w.region = 'u_tunnel';
   for (let x = 152; x < 176; x += 1.2) for (let z = -5; z <= 5; z += 1.2) { const k = (Math.round(x / 1.2) + Math.round(z / 1.2)) % 3; w.add('m', sph(8), [0xb9956e, 0xa88560, 0xc9a77e][k], x, Y + 0.01, z, 0, 0, 0, 0.55, 0.04, 0.55); }
   for (let x = 156; x < 176; x += 4.5) { w.add('m', torus(0.35, 28, PI), 0xb9956e, x, Y + 3.6, 0, 0, PI / 2, 0, 5.4, 0.6, 1.4); [-5.4, 5.4].forEach((z) => { w.add('m', rbox(0.9, 3.6, 0.9, 0.2), 0xb9956e, x, Y + 1.8, z); w.solid(x - 0.45, Y, z - 0.45, x + 0.45, Y + 3.6, z + 0.45); }); }
@@ -25,9 +25,9 @@ export function underground(w) { const Y = UY;
   for (let i = 0; i < 10; i++) w.add('m', blobGeo(i, 0.3, 1), pick(ROCK), 152 + R() * 22, Y + 0.15, (R() < 0.5 ? -1 : 1) * (4.2 + R() * 0.8), 0, R() * 6, 0, 0.3 + R() * 0.3, 0.2, 0.3);
   { const x = 151.2; for (let i = 0; i < 5; i++) w.add('m', rbox(1.2, 0.3, 3, 0.05), 0xb9956e, x - i * 0.0, Y + 0.3 + i * 0.3, 0, 0, 0, 0, 1, 1, 1); w.add('l', sph(10), 0xfff1c1, x - 0.3, Y + 2.8, 0, 0, 0, 0, 0.4, 0.15, 0.6, 0.5); }
   w.I({ kind: 'climb', x: 152.5, y: Y, z: 0, r: 2.0, label: '🪜 Climb back up to the canyon' });
-  sign3d(w, 'SLOW AND STEADY FINDS THE WAY', 163, Y + 3.2, -5.6, 0, 0.18, 0xffd23f, 0x5b4334);
+  sign3d(w, 'LAUNCH COUNTDOWN FINDS THE WAY', 163, Y + 3.2, -5.6, 0, 0.18, 0xffd23f, 0x5b4334);
   w.gears.push([166, Y + 0.9, 3.5]);
-  // ---------------- CRYSTAL CAVERN
+  // ---------------- ICE CRYSTAL CAVERN
   room(w, 'u_crystal', 176, -16, 204, 16, -22.5, 0x7a6a8a, [['z', 176, -2, 2], ['z', 204, -2, 2], ['x', 16, 188, 192]]); w.region = 'u_crystal';
   const cc = [0x5eead4, 0xa78bfa, 0xf472b6, 0x60a5fa, 0xfde68a];
   [[180, -12, 1.6], [184, 12, 1.9], [190, -13, 2.2], [198, 12.5, 1.8], [201, -11, 1.5], [179, 7, 1.2], [194, 6, 1.0], [187, -6, 0.9], [200, 3, 1.1], [183, -2.5, 0.7]].forEach(([x, z, s], i) => { crystal(w, x, Y, z, s, cc[i % 5], 0, i); w.solid(x - 0.5 * s, Y, z - 0.5 * s, x + 0.5 * s, Y + 1.8 * s, z + 0.5 * s); w.lights.push({ x, y: Y + 1.6, z, c: cc[i % 5], i: 6, d: 9 }); });
@@ -37,7 +37,7 @@ export function underground(w) { const Y = UY;
   for (let i = 0; i < 24; i++) { const x = 177.5 + R() * 25, z = (R() < 0.5 ? -1 : 1) * (8 + R() * 7); w.add('m', cyl(8), 0xfef3c7, x, Y, z, 0, 0, 0, 0.05, 0.3, 0.05); w.add('l', sph(10), pick([0x5eead4, 0xf472b6, 0xa78bfa]), x, Y + 0.35, z, 0, 0, 0, 0.18, 0.1, 0.18, 0.5); }
   w.secrets.push({ id: 'echo', x: 191, y: Y, z: -4.6, r: 1.6, msg: '💎 Secret: the singing crystal! Tap tap… it hums a slow little tune.' });
   w.gears.push([179, Y + 3.2, 7]); w.gears.push([201, Y + 1.2, 6]);
-  // ---------------- GLOWSHROOM GROTTO (through the crystal cavern): an underground stream, giant glowing mushrooms, the ancestors' shell library + the oldest durability test
+  // ---------------- NORTHERN LIGHTS GROTTO (through the crystal cavern): an underground stream, giant glowing mushrooms, the ancestors' shell library + the oldest durability test
   room(w, 'u_grotto', 178, 16, 206, 42, -21.5, 0x5c6b4a, [['x', 16, 188, 192]]); w.region = 'u_grotto';
   { // winding stream with a little arched stone bridge
     for (let i = 0; i < 18; i++) { const x = 179 + i * 1.6, z = 29 + Math.sin(i * 0.55) * 3; w.add('l', rcyl(1.3, 0.05, 0.02, 20), 0x22d3ee, x, Y + 0.02, z, 0, 0, 0, 1, 1, 0.8, 0.12); w.add('e', rcyl(1.25, 0.08, 0.02, 20), 0x7dd3fc, x, Y + 0.06, z, 0, 0, 0, 1, 1, 0.8); }
@@ -53,10 +53,10 @@ export function underground(w) { const Y = UY;
     { const x = 202.5, z = 29; w.add('m', rbox(3.2, 4.2, 1.2, 0.3), 0x7a6a5a, x + 1.6, Y + 2.1, z); for (let k = 0; k < 6; k++) w.add('e', capsule(10), 0x7dd3fc, x + 0.6, Y + 2.0, z - 0.6 + k * 0.24, 0, 0, 0, 0.1, 3.8, 0.1); w.add('l', rcyl(1.0, 0.06, 0.02, 20), 0xbfeaff, x, Y + 0.05, z, 0, 0, 0, 1, 1, 1, 0.3); w.add('g', lathe([[0, 0], [0.8, 0], [0.75, 0.3], [0.5, 0.6], [0, 0.68]], 28, 'oshell'), 0x8a6a52, x - 0.2, Y + 0.1, z); w.solid(x - 1, Y, z - 1, x + 3.2, Y + 4.2, z + 1); }
     { const x = 194.5, z = 18.6; w.add('m', rcyl(0.6, 0.8, 0.1, 20), 0xb9956e, x, Y, z); w.add('l', lathe([[0, 0], [0.3, 0], [0.34, 0.12], [0.22, 0.3], [0, 0.36]], 20, 'relicShell'), 0xffd23f, x, Y + 0.8, z, 0, 0, 0, 1, 1, 1, 0.6); w.solid(x - 0.6, Y, z - 0.6, x + 0.6, Y + 0.85, z + 0.6); w.lights.push({ x, y: Y + 1.5, z, c: 0xffd23f, i: 6, d: 6 }); }
     w.secrets.push({ id: 'grotto', x: 0, y: -999, z: 0, r: -1, msg: '' }, { id: 'hall', x: 0, y: -999, z: 0, r: -1, msg: '' }); w.I({ kind: 'relic', x: 194.5, y: Y, z: 20.2, r: 2.0, label: '🐚 Look at the golden shell' });
-    sign3d(w, 'GLOWSHROOM GROTTO', 192, Y + 6.2, 16.4, PI, 0.28, 0x5eead4, 0x3f4a33);
+    sign3d(w, 'NORTHERN LIGHTS GROTTO', 192, Y + 6.2, 16.4, PI, 0.28, 0x5eead4, 0x3f4a33);
     w.gears.push([181, Y + 3.9, 20]); w.gears.push([203, Y + 4.6, 37]); w.gears.push([190.2, Y + 1.6, 29 + Math.sin(7 * 0.55) * 3]);
     w.secrets.push({ id: 'stream', x: 184, y: Y, z: 28.6, r: 1.6, msg: '💧 Secret: the glowing stream! Little cave fish swim by… very, very slowly.' }); }
-  // ---------------- HALL OF THE ANCESTORS
+  // ---------------- HALL OF THE FIRST ELVES
   room(w, 'u_hall', 204, -14, 232, 14, -23.0, 0xc9a27a, [['z', 204, -2, 2]]); w.region = 'u_hall';
   const disc = new THREE.CircleGeometry(6, 64).rotateX(-PI / 2); w.addFn('g', disc, (c, x, y, z) => { const r = Math.hypot(x, z), a = Math.atan2(z, x); c.setHex(r < 1.6 ? 0xa78bfa : r < 4 ? ((Math.floor((a + PI) / (PI / 6)) % 2) ? 0x6366f1 : 0x312e81) : 0xd4a017); }, 222, Y + 0.02, 0);
   for (let i = 0; i < 6; i++) [-9, 9].forEach((z) => { const x = 208 + i * 4.4; w.add('m', lathe([[0, 0], [0.8, 0], [0.8, 0.4], [0.6, 0.6], [0.55, 6.4], [0.8, 6.8], [0.9, 7.0], [0, 7.0]], 20, 'apillar'), 0xd9b88a, x, Y, z); w.solid(x - 0.6, Y, z - 0.6, x + 0.6, Y + 7, z + 0.6); w.add('l', sph(8), 0xfde68a, x, Y + 5.6, z * 0.92, 0, 0, 0, 0.2, 0.2, 0.2, 0.6); });
@@ -65,6 +65,6 @@ export function underground(w) { const Y = UY;
   { const x = 222, z = 0; w.slab('m', 0xd9b88a, x, Y, z, 3.2, 0.6, 3.2, 0.2); w.add('m', rcyl(0.8, 1.1, 0.1, 28), 0xc9a27a, x, Y + 0.6, z); w.add('x', rcyl(0.9, 0.14, 0.04, 28), 0xd4a017, x, Y + 1.7, z); w.solid(x - 0.9, Y, z - 0.9, x + 0.9, Y + 1.85, z + 0.9); w.spots.moonstone = [x, Y + 2.35, z]; w.lights.push({ x, y: Y + 3, z, c: 0xc4b5fd, i: 10, d: 12 }); }
   w.I({ kind: 'moonstone', x: 222, y: Y, z: 2.4, r: 2.4, label: '🌙 Approach the glowing altar' });
   w.I({ kind: 'fun', x: 229.5, y: Y, z: -3.4, r: 2.4, label: '🖼️ Read the ancient murals', msgs: ['🖼️ The murals show the first tortoises finding two stones: one warm like the sun, one cool like the moon.', '🖼️ "The Sleigh Bells warms the town above. The Moonstone keeps watch below. Slow and steady, together."', '🖼️ The last panel shows a tiny tortoise looking up at the stars. It looks a lot like Torty.'] });
-  sign3d(w, 'HALL OF THE ANCESTORS', 218, Y + 6.0, -13.6, 0, 0.32, 0xfde68a, 0x5b4334);
+  sign3d(w, 'HALL OF THE FIRST ELVES', 218, Y + 6.0, -13.6, 0, 0.32, 0xfde68a, 0x5b4334);
   w.gears.push([210, Y + 3.2, -12.4]); w.gears.push([230, Y + 0.8, 11]);
 }
