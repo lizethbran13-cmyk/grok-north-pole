@@ -53,7 +53,7 @@ const EV0 = [
   { id: 'parade', name: 'Thanksgiving Day Elf Parade', icon: '🎈', start: '11-26', end: '11-26', where: 'around the arena', blurb: 'Tracker elves march in the Elf Parade with floats and bands.' },
   { id: 'xmas', name: 'Christmas Day Party', icon: '🎄', start: '12-25', end: '12-25', where: 'the Event Center', blurb: 'Santa is home from the big night! Cocoa, carols and presents for every elf.' },
 ];
-export const ONGOING = [['🎨 North Pole Art Contest', '09-15', '11-25', '"Making Christmas Merry". Show Santa how you see the North Pole getting ready.'], ['🧝 Visiting Elf sign-up', '08-13', '11-22', 'Sign up to get your Visiting Elf this year.']];
+export const ONGOING = [['🎨 North Pole Art Contest', '09-15', '12-20', '"Making Christmas Merry". Show Santa how you see the North Pole getting ready.'], ['🧝 Visiting Elf sign-up', '08-13', '10-24', 'Sign up to get your Visiting Elf this year.']];
 export const EVENTS = EV0.map((e) => ({ ...e, s: `${YEAR}-${e.start}`, e: `${YEAR}-${e.end}` }));
 export function eventState() { const live = EVENTS.find((e) => TODAY >= e.s && TODAY <= e.e); const nxt = EVENTS.filter((e) => e.s > TODAY);
   const feat = live || nxt[0] || { ...EVENTS[0], s: `${YEAR + 1}-${EV0[0].start}`, e: `${YEAR + 1}-${EV0[0].end}`, tba: true };
