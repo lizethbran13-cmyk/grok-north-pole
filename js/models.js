@@ -30,7 +30,7 @@ export function makeRat(id, outfit, opts = {}) {
   t.f.add(P.sphere, C.fur, 0, 0.38, -0.36, 0, 0, 0, 0.33, 0.29, 0.32);
   t.f.add(P.sphere, C.belly, 0, 0.27, 0.06, 0, 0, 0, 0.27, 0.2, 0.38);
   if (id === 'luna') t.f.add(P.sphere, C.dark, 0, 0.55, -0.15, 0, 0, 0, 0.26, 0.12, 0.42); // darker saddle
-  if (id === 'pirat') { t.f.add(P.sphere, C.hood, 0, 0.42, 0.2, 0, 0, 0, 0.3, 0.26, 0.2); } // hooded rat: dark hood over head & shoulders
+  // Pi-rat: the taupe hood is on her head only (body stays white)
   // Ratita Industries backpack
   const X = opts.extras || [];
   if (opts.pack !== false) { const pc = opts.pack || 0xff4fa0; t.g.add(P.rbox, pc, 0, 0.66, -0.2, 0, 0, 0, 0.36, 0.22, 0.34); t.g.add(P.rboxS, 0xffd23f, 0, 0.78, -0.2, 0, 0, 0, 0.3, 0.06, 0.28);
@@ -44,7 +44,7 @@ export function makeRat(id, outfit, opts = {}) {
   const head = new THREE.Group(); head.position.set(0, 0.48, 0.36); body.add(head);
   const h = MB();
   h.f.add(P.sphere, C.hood || C.fur, 0, 0, 0, 0, 0, 0, 0.27, 0.25, 0.27);
-  h.f.add(P.sphere, C.hood || C.fur, 0, -0.05, 0.2, 0.25, 0, 0, 0.17, 0.15, 0.22);
+  h.f.add(P.sphere, C.fur, 0, -0.05, 0.2, 0.25, 0, 0, 0.17, 0.15, 0.22); // white muzzle
   if (C.hood) { h.f.add(P.sphere, 0xffffff, 0, 0.12, 0.2, -0.5, 0, 0, 0.045, 0.16, 0.06); h.f.add(P.sphere, 0xffffff, 0, -0.06, 0.36, 0.25, 0, 0, 0.09, 0.08, 0.08); } // forehead blaze + white muzzle tip
   h.f.add(P.sphere, C.belly, 0, -0.1, 0.25, 0.25, 0, 0, 0.12, 0.08, 0.15);
   h.g.add(P.sphere, 0xff8fb0, 0, -0.03, 0.42, 0, 0, 0, 0.055, 0.045, 0.045);
@@ -54,7 +54,7 @@ export function makeRat(id, outfit, opts = {}) {
   eyes(h, 0.05, 0.19, 0.11, 0.072, { iris: C.eye, closed: id === 'pirat' ? 1 : 0 });
   h.g.add(P.sphere, 0xffffff, -0.025, -0.13, 0.34, 0, 0, 0, 0.025, 0.035, 0.012); h.g.add(P.sphere, 0xffffff, 0.025, -0.13, 0.34, 0, 0, 0, 0.025, 0.035, 0.012); // teeth
   if (X.includes('glasses')) { [-1, 1].forEach((sd) => h.x.add(P.torus, opts.glass || 0x1f2937, sd * 0.11, 0.05, 0.255, 0, 0, 0, 0.085, 0.085, 0.12)); h.x.add(P.cyl, opts.glass || 0x1f2937, 0, 0.06, 0.265, 0, 0, PI / 2, 0.012, 0.06, 0.012); }
-  if (X.includes('patch')) { h.g.add(P.sphere, 0x111111, 0.11, 0.05, 0.25, 0, 0, 0, 0.08, 0.075, 0.03); h.g.add(P.torus, 0x111111, 0, 0.09, 0.02, 0.35, 0, 0.35, 0.29, 0.27, 0.06); }
+  if (X.includes('patch')) { h.g.add(P.sphere, 0x111111, 0.11, 0.05, 0.25, 0, 0, 0, 0.08, 0.075, 0.03); h.g.add(P.cyl, 0x111111, 0.11, 0.05, 0.25, 0, 0, 0.6, 0.008, 0.5, 0.008); }
   if (X.includes('headset')) { h.g.add(P.torus, 0x334155, 0, 0.05, 0, 0, PI / 2, 0, 0.28, 0.27, 0.1); h.g.add(P.sphere, 0x334155, -0.27, 0.0, 0.02, 0, 0, 0, 0.06, 0.07, 0.07); h.g.add(P.cyl, 0x334155, -0.18, -0.08, 0.18, 0.2, 0.9, 0, 0.012, 0.25, 0.012); h.l.add(P.sphere, 0x3ff0ff, -0.08, -0.1, 0.3, 0, 0, 0, 0.025, 0.025, 0.025, 0.5); }
   head.add(toGroup(h));
   // feet
